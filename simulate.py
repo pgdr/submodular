@@ -3,11 +3,13 @@
 
 import random
 
-random.seed(2021)
-ITERS = 1 << 20
+
+from functools import cache
 
 
-def simulate(C, width=200, height=100):
+@cache
+def simulate(C, width=200, height=100, ITERS=1 << 13):
+    area = width * height
     hits = 0
     for _ in range(ITERS):
         x = random.uniform(0, width)
@@ -16,4 +18,4 @@ def simulate(C, width=200, height=100):
             (x - t.center.x) ** 2 + (y - t.center.y) ** 2 <= t.radius**2 for t in C
         )
 
-    return round(width * height * hits / ITERS, 2)
+    return round(100 * (hits / ITERS), 2)
