@@ -6,9 +6,14 @@ import random
 
 from functools import cache
 
+SIM_COUNTER = 0
+
 
 @cache
-def simulate(C, width=200, height=100, ITERS=1 << 13):
+def simulate(C, width=200, height=100, ITERS=1 << 9):
+    global SIM_COUNTER
+    SIM_COUNTER += 1
+
     area = width * height
     hits = 0
     for _ in range(ITERS):
